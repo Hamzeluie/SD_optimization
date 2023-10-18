@@ -13,6 +13,7 @@ note: this dataset is stored to private server, but you can use your owne datase
 
         git clone https://github.com/Hamzeluie/SD_optimization.git
         dvc init
+        
 # stages
 there is two stage in this project 
 train and convert

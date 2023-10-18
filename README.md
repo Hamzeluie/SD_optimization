@@ -15,4 +15,26 @@ note: this dataset is stored to private server, but you can use your owne datase
         dvc init
 # stages
 there is two stage in this project 
-train and evalutaion
+train and convert
+* train: in this step. train model and evaluate. base on metrices wich you choose in 'eval_index' in params.yaml every 'checkpointing_steps'. if choosen metric tend to be muximize to be better results 'eval_index_max: True' else 'eval_index_max: False'.note 'resolution' parameter. it would result to size of output of SD.finally output of this stage is result/trainedmodel and reults/env/<dataset_name> you can see evaluation results in env folder. it contains generated fake images ,plots and metrics.
+* convert: after training model.it convert pipelines to checkpoints.'checkpoint_path' is trained pipeline path and 'trained_model_path' is path of checkpoint to output ckpt files
+
+# dvc notation
+every training proccess and uploading dataset will track with dvc.
+after while when you work with dvc repository you may change , delete and create dataset and trained model.it will take storage space even dataset that you removed and not currently use in the repository will be in '.dvc/catch' file.so you have heavy catch.which is not currently use. you can clean catch of dvc and remove the data that is not available currently by
+
+        dvc gc --workspace
+
+it will not remove catch of currently use data.just the data which is not use any more.
+you can test it with this example.
+
+        cd SD_optimization
+        du -sh .dvc
+
+check value of code then remove a dataset then 
+
+        dvc gc --workspace
+        du -sh .dvc
+
+compare with past space.
+

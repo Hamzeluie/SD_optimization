@@ -1,0 +1,6 @@
+[core]
+    remote = rteam1
+    hardlink_lock = true
+['remote "rteam1"']
+    url = ssh://rteam1@153.156.254.150:50006/home/rteam1/Downloads/hmz/sd/scratch_dvc
+    ask_password = true

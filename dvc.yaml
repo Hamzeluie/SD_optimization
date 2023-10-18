@@ -1,0 +1,43 @@
+stages:
+  train:
+    cmd: python src/train.py params.yaml
+    deps:
+    - data
+    - src/train.py
+    params:
+    - train.eval_path
+    - train.dataset_name
+    - train.eval_index
+    - train.eval_index_max
+    - train.adam_beta1
+    - train.adam_beta2
+    - train.adam_epsilon
+    - train.adam_weight_decay
+    - train.checkpointing_steps
+    - train.instance_data_dir
+    - train.instance_prompt
+    - train.learning_rate
+    - train.lr_num_cycles
+    - train.lr_power
+    - train.lr_warmup_steps
+    - train.max_grad_norm
+    - train.max_train_steps
+    - train.num_train_epochs
+    - train.pretrained_model_name_or_path
+    - train.resolution
+    - train.sample_batch_size
+    - train.train_batch_size
+    - train.trained_model_path
+    - train.with_prior_preservation
+    outs:
+    - results/trained_model
+  convert:
+    cmd: python src/convert_ckpt.py params.yaml
+    deps:
+    - results/trained_model
+    - src/convert_ckpt.py
+    params:
+    - convert.checkpoint_path
+    - convert.trained_model_path
+    outs:
+    - results/checkpoints

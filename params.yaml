@@ -1,0 +1,44 @@
+train:
+  dataset_name: "neck"
+  eval_index: "IS_score_mean"
+  eval_index_max: True
+  eval_path: /home/naserwin/hamze/SD_optimization/results/eval
+  pretrained_model_name_or_path: runwayml/stable-diffusion-v1-5
+  resolution: 512
+  train_batch_size: 1
+  max_train_steps: 40000
+  checkpointing_steps: 5000
+  num_train_epochs: 1
+  sample_batch_size: 1
+  instance_prompt: '#screw@neck@defect#'
+  instance_data_dir: /home/naserwin/hamze/SD_optimization/data/screw
+  trained_model_path: /home/naserwin/hamze/SD_optimization/results
+  adam_beta1: 0.09
+  adam_beta2: 0.999
+  adam_weight_decay: 0.01
+  adam_epsilon: 0.00000001
+  max_grad_norm: 1.0
+  learning_rate: 0.000005
+  lr_warmup_steps: 500
+
+  lr_num_cycles: 1
+  lr_power: 1.0
+  with_prior_preservation: False
+app:
+  input_checkpoint_path: /home/naserwin/hamze/SD_optimization/results/trained_model/head/checkpoint-best-step=5000-IS_score_mean=3.353
+  output_checkpoint_path: /home/naserwin/hamze/SD_optimization/results/trained_model/head/checkpoint-best-step=5000-IS_score_mean=3.353
+evaluation:
+  dataset_name: "neck"
+  trained_model_path: /home/naserwin/hamze/SD_optimization/results/trained_model
+  instance_data_dir: /home/naserwin/hamze/SD_optimization/data/screw
+  instance_prompt: '#screw@neck@defect#'
+  eval_path: /home/naserwin/hamze/SD_optimization/results/eval
+  img_type: png
+convert:
+  dataset_name: "neck"
+  trained_model_path: /home/naserwin/hamze/SD_optimization/results/trained_model
+  checkpoint_path: /home/naserwin/hamze/SD_optimization/results/checkpoints
+
+
+
+

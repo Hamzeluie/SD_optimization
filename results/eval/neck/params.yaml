@@ -1,0 +1,53 @@
+pretrained_model_name_or_path: runwayml/stable-diffusion-v1-5
+resolution: 512
+train_batch_size: 1
+max_train_steps: 40000
+checkpointing_steps: 5000
+num_train_epochs: 11
+sample_batch_size: 4
+trained_model_path: /home/naserwin/hamze/SD_optimization/results/trained_model/neck
+instance_prompt: '#screw@neck@defect#'
+instance_data_dir: /home/naserwin/hamze/SD_optimization/data/screw/neck
+dataset_name: neck
+eval_index: IS_score_mean
+eval_index_max: true
+eval_path: /home/naserwin/hamze/SD_optimization/results/eval
+adam_beta1: 0.09
+adam_beta2: 0.999
+adam_weight_decay: 0.01
+adam_epsilon: 1e-08
+max_grad_norm: 1.0
+learning_rate: 5e-06
+lr_warmup_steps: 500
+lr_num_cycles: 1
+lr_power: 1.0
+with_prior_preservation: false
+scale_lr: false
+lr_scheduler: constant
+logging_dir: logs
+report_to: tensorboard
+prior_loss_weight: 1.0
+num_class_images: 1
+center_crop: false
+checkpoints_total_limit:
+gradient_accumulation_steps: 1
+checkpoint_path:
+allow_tf32:
+mixed_precision:
+enable_xformers_memory_efficient_attention:
+push_to_hub:
+hub_token:
+hub_model_id:
+revision:
+tokenizer_name:
+class_data_dir: /home/naserwin/hamze/SD_optimization/data/screw/neck
+class_prompt: '#screw@neck@defect#'
+seed:
+train_text_encoder:
+resume_from_checkpoint: false
+use_8bit_adam:
+gradient_checkpointing:
+prior_generation_precision:
+local_rank:
+half:
+use_safetensors:

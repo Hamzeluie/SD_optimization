@@ -481,8 +481,9 @@ class TrainMultiSubjectSD():
                 accelerator.log(logs, step=global_step)
                 if global_step >= args.max_train_steps:
                     break
-        
+        live.make_report()
         live.end()
+        
         # Create the pipeline using using the trained modules and save it.
         accelerator.wait_for_everyone()
         if accelerator.is_main_process:

@@ -1,10 +1,10 @@
 {
-    "FID_score": 398.946,
-    "IS_score_mean": 2.889,
-    "IS_score_std": 0.41,
-    "KID_score_mean": 0.187,
+    "FID_score": 343.303,
+    "IS_score_mean": 3.152,
+    "IS_score_std": 0.456,
+    "KID_score_mean": 0.11,
     "KID_score_std": 0.0,
     "CLIP_score": -1,
     "loss": 0.002,
-    "step": 2
+    "step": 7
 }

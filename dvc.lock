@@ -5,12 +5,12 @@ stages:
     deps:
     - path: data
       hash: md5
-      md5: d78d75e69d0b7ff8150401ec6ef2bc81.dir
-      size: 3009647873
-      nfiles: 8804
+      md5: 07c1d0c0dc61cc8b5c2647ac76f16c94.dir
+      size: 2717418266
+      nfiles: 7683
     - path: src/train.py
       hash: md5
-      md5: 8be1bda062ff021fb0897689fdb832c2
+      md5: 97f5fc87f102670b3e0b2ea528d38ef6
       size: 7087
     params:
       params.yaml:
@@ -19,12 +19,12 @@ stages:
         train.adam_epsilon: 1e-08
         train.adam_weight_decay: 0.01
         train.checkpointing_steps: 5000
-        train.dataset_name: head
+        train.dataset_name: neck
         train.eval_index: IS_score_mean
         train.eval_index_max: true
         train.eval_path: /home/naserwin/hamze/SD_optimization/results/eval
         train.instance_data_dir: /home/naserwin/hamze/SD_optimization/data/screw
-        train.instance_prompt: '#screw@head@defect#'
+        train.instance_prompt: '#screw@neck@defect#'
         train.learning_rate: 5e-06
         train.lr_num_cycles: 1
         train.lr_power: 1.0
@@ -41,7 +41,7 @@ stages:
     outs:
     - path: results/trained_model
       hash: md5
-      md5: 2f21e96f399e4f861612ba257a68f64e.dir
+      md5: 09cafd70e8cd54db4faf8f16c0ce82df.dir
       size: 10968719085
       nfiles: 33
   convert:
@@ -49,7 +49,7 @@ stages:
     deps:
     - path: results/trained_model
       hash: md5
-      md5: 2f21e96f399e4f861612ba257a68f64e.dir
+      md5: 09cafd70e8cd54db4faf8f16c0ce82df.dir
       size: 10968719085
       nfiles: 33
     - path: src/convert_ckpt.py
@@ -63,6 +63,6 @@ stages:
     outs:
     - path: results/checkpoints
       hash: md5
-      md5: 2d29f60044029d6be57ea82851360995.dir
-      size: 8530708914
+      md5: d9d514b9fefc42ee2057efa9088c7348.dir
+      size: 8530710047
       nfiles: 2

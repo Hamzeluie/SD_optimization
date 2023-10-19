@@ -12,8 +12,8 @@ import shutil
 
 if __name__ == "__main__":  
     # get parameters
-    param_yaml_file = sys.argv[1]
-    # param_yaml_file = "/home/naserwin/hamze/SD_optimization/params.yaml"
+    # param_yaml_file = sys.argv[1]
+    param_yaml_file = "/home/naserwin/hamze/SD_optimization/params.yaml"
     params = yaml.safe_load(open(param_yaml_file))
     params = params["convert"]
     dataset_name = params["dataset_name"]

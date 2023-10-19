@@ -27,18 +27,22 @@ def write_config(cof_dict):
     file.close()
     
     
-def defect_generate(prompt, dict, padding, blur_len, strength_slider, CFG_Scale_slider, transparency, num_inference_steps):
+def defect_generate(prompt, dict, padding, blur_len, strength_slider, CFG_Scale_slider, transparency, num_inference_steps, inference_batch):
+    inference_batch = int(inference_batch)
     init_img =  dict['image'].convert("RGB")
     mask_img = dict['mask'].convert("RGB")
     # image = generator.generate(prompt)
-    image = pipeline.generate(prompt,init_img,mask_img, padding, blur_len, strength_slider, CFG_Scale_slider, transparency=transparency, num_inference_steps=num_inference_steps)
+    images = []
+    print("************", inference_batch)
+    for _ in range(inference_batch):
+        images.append(pipeline.generate(prompt,init_img,mask_img, padding, blur_len, strength_slider, CFG_Scale_slider, transparency=transparency, num_inference_steps=num_inference_steps))
     write_config(cof_dict= {"padding": padding, 
                 "blur_len": blur_len, 
                 "strength_slider": strength_slider,
                 "CFG_Scale_slider": CFG_Scale_slider, 
                 "transparency": transparency, 
                 "num_inference_steps":num_inference_steps})
-    return image
+    return images
 
 
 def grpu_proccess_kill():
@@ -71,10 +75,11 @@ with gr.Blocks(css=css) as demo:
         padding_slider = gr.Slider(0, 256, 32,label="Mask Padding")
         blur_slider = gr.Slider(1, 256, 9,label="Mask Blur")
         num_inference_steps = gr.Slider(1, 300, 150,label="num_inference_steps")
+    inference_batch = gr.Number(value=1, minimum=1, maximum=5, label="inference batch")
     input_img = gr.Image(label="Image", elem_id="image_upload",type='pil', tool='sketch').style(height=800)
-    output = gr.Image(label="Generated Image")
+    output = gr.Gallery(label="Generated images", show_label=False, elem_id="gallery", columns=[3], rows=[2], object_fit="contain", height="auto")
     
-    greet_btn.click(fn=defect_generate, inputs=[prompt, input_img, padding_slider, blur_slider, strength_slider, CFG_Scale_slider, transparency, num_inference_steps], outputs=output, api_name="General Generative Defect", )
+    greet_btn.click(fn=defect_generate, inputs=[prompt, input_img, padding_slider, blur_slider, strength_slider, CFG_Scale_slider, transparency, num_inference_steps, inference_batch], outputs=output, api_name="General Generative Defect", )
     close_btn.click(grpu_proccess_kill)
 
 demo.launch(share=False)
